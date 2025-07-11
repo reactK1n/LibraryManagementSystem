@@ -9,7 +9,7 @@ namespace LibraryManagementSystem.Api.Extensions
         {
             //repository DI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddApplicationSevicesInjection();
+            //services.AddApplicationSevicesInjection();
         }
     }
 }
