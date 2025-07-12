@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using LibraryManagementSystem.Domain.Dtos;
+using LibraryManagementSystem.Application.Dtos;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryManagementSystem.Domain.Utilities
+namespace LibraryManagementSystem.Application.Utilities
 {
     public static class Paginator
     {

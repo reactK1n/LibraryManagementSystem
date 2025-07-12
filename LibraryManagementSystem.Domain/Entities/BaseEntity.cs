@@ -7,7 +7,7 @@ namespace LibraryManagementSystem.Domain.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual long Id { get; set; }
+        public virtual int Id { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreatedAt { get; set; }

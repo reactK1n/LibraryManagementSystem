@@ -1,4 +1,4 @@
-﻿namespace LibraryManagementSystem.Domain.Dtos
+﻿namespace LibraryManagementSystem.Application.Dtos
 {
     public class ApiResponse
     {

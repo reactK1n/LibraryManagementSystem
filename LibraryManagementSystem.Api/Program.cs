@@ -1,6 +1,7 @@
 using LibraryManagementSystem.Api.Extensions;
 using LibraryManagementSystem.Application.Extensions;
 using LibraryManagementSystem.Application.Utilities;
+using LibraryManagementSystem.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,8 +25,8 @@ builder.Services.AddAuthenticationConfig(builder.Configuration);
 // Swagger configuration for authorization
 builder.Services.AddSwaggerConfig();
 
-//builder.Services.AddSingleton<LoggerHandler>();
-//builder.Services.AddTransient<GlobalExceptionHandler>();
+builder.Services.AddSingleton<LoggerHandler>();
+builder.Services.AddTransient<GlobalExceptionHandler>();
 
 var app = builder.Build();
 
@@ -35,7 +36,7 @@ app.UseDeveloperExceptionPage();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-//app.UseMiddleware<GlobalExceptionHandler>();
+app.UseMiddleware<GlobalExceptionHandler>();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

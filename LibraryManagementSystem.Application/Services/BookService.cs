@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using LibraryManagementSystem.Application.Interfaces;
-using LibraryManagementSystem.Domain.Dtos;
+using LibraryManagementSystem.Application.Dtos;
 using LibraryManagementSystem.Domain.Entities;
 using LibraryManagementSystem.Domain.IRepository;
-using LibraryManagementSystem.Domain.Utilities;
+using LibraryManagementSystem.Application.Utilities;
 using Microsoft.Extensions.Logging;
 using static LibraryManagementSystem.Application.Dtos.BookDtos;
 
@@ -27,13 +27,14 @@ namespace LibraryManagementSystem.Application.Services
         /// </summary>
         public async Task<ApiResponse> CreateAsync(CreateRequest dto)
         {
-            var book = _mapper.Map<Book>(dto);
+            var book = _mapper.Map<Book>(dto); //map incoming request dto to the type book
+
             await _unitOfWork.BookRepository.InsertAsync(book);
             await _unitOfWork.SaveChangesAsync();
 
-            _logger.LogInformation("Book created: {@Book}", book);
+            _logger.LogInformation($"Book created: {book}");
 
-            var result = _mapper.Map<BookResponse>(book);
+            var result = _mapper.Map<BookResponse>(book); //map type book to the outgoing response
             return new ApiResponse
             {
                 Status = true,
@@ -49,7 +50,7 @@ namespace LibraryManagementSystem.Application.Services
         {
             var query = _unitOfWork.BookRepository.GetContext().AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(request.Search))
+            if (!string.IsNullOrWhiteSpace(request.Search)) //if search is not null or empty, return all books
             {
                 var search = request.Search.ToLower();
 
@@ -60,9 +61,9 @@ namespace LibraryManagementSystem.Application.Services
             }
 
             var paginated = await query.PaginationAsync<Book, BookResponse>(
-                request.PageSize, request.PageNumber, _mapper);
+                request.PageSize, request.PageNumber, _mapper); //paginate result
 
-            _logger.LogInformation("Books fetched with search: '{Search}', Page {PageNumber}", request.Search, request.PageNumber);
+            _logger.LogInformation($"Books fetched with search: '{request.Search}', Page {request.PageNumber}");
 
             return new ApiResponse
             {
@@ -80,12 +81,12 @@ namespace LibraryManagementSystem.Application.Services
             var book = await _unitOfWork.BookRepository.GetByIdAsync(id);
             if (book == null)
             {
-                _logger.LogWarning("Book not found: ID {Id}", id);
+                _logger.LogWarning($"Book not found: ID {id}");
 
                 return new ApiResponse{ Message = "Book not found" };
             }
 
-            _logger.LogInformation("Book retrieved: ID {Id}", id);
+            _logger.LogInformation($"Book retrieved: ID {id}");
 
             var result = _mapper.Map<BookResponse>(book);
             return new ApiResponse
@@ -104,7 +105,7 @@ namespace LibraryManagementSystem.Application.Services
             var book = await _unitOfWork.BookRepository.GetByIdAsync(id);
             if (book == null)
             {
-                _logger.LogWarning("Book not found for update: ID {Id}", id);
+                _logger.LogWarning($"Book not found for update: ID {id}");
 
                 return new ApiResponse { Message = "Book not found" };
             }
@@ -113,7 +114,7 @@ namespace LibraryManagementSystem.Application.Services
             _unitOfWork.BookRepository.Update(book);
             await _unitOfWork.SaveChangesAsync();
 
-            _logger.LogInformation("Book updated: ID {Id}", id);
+            _logger.LogInformation($"Book updated: ID {id}");
 
             var result = _mapper.Map<BookResponse>(book);
             return new ApiResponse
@@ -132,15 +133,15 @@ namespace LibraryManagementSystem.Application.Services
             var book = await _unitOfWork.BookRepository.GetByIdAsync(id);
             if (book == null)
             {
-                _logger.LogWarning("Book not found for deletion: ID {Id}", id);
+                _logger.LogWarning($"Book not found for deletion: ID {id}");
 
                 return new ApiResponse { Message = "Book not found" };
             }
 
             _unitOfWork.BookRepository.Delete(book);
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync(); 
 
-            _logger.LogInformation("Book deleted: ID {Id}", id);
+            _logger.LogInformation($"Book deleted: ID {id}");
 
             return new ApiResponse
             {

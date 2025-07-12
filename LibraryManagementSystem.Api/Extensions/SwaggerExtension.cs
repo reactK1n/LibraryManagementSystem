@@ -14,7 +14,7 @@ namespace LibraryManagementSystem.Api.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "LMS",
+                    Title = "Library-Management-System",
                     Version = "v1"
                 });
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LibraryManagementSystem.Application.Interfaces;
-using LibraryManagementSystem.Domain.Dtos;
+using LibraryManagementSystem.Application.Dtos;
 using LibraryManagementSystem.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;

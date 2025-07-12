@@ -1,5 +1,4 @@
 ﻿using LibraryManagementSystem.Application.Dtos;
-using LibraryManagementSystem.Domain.Dtos;
 
 namespace LibraryManagementSystem.Application.Interfaces
 {

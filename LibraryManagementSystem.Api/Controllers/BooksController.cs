@@ -46,8 +46,8 @@ namespace LibraryManagementSystem.Api.Controllers
         /// </summary>
         /// <param name="id">The ID of the book to retrieve.</param>
         /// <returns>Book details in an ApiResponse.</returns>
-        [HttpGet("{id:long}")]
-        public async Task<IActionResult> GetById(long id)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _bookService.GetByIdAsync(id);
             return StatusCode(result.Status ? 200 : 400, result);
@@ -59,8 +59,8 @@ namespace LibraryManagementSystem.Api.Controllers
         /// <param name="id">ID of the book to update.</param>
         /// <param name="request">Updated book data.</param>
         /// <returns>ApiResponse indicating success or failure.</returns>
-        [HttpPut("{id:long}")]
-        public async Task<IActionResult> Update(long id, [FromBody] UpdateRequest request)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateRequest request)
         {
             var result = await _bookService.UpdateAsync(id, request);
             return StatusCode(result.Status ? 200 : 400, result);
@@ -71,8 +71,8 @@ namespace LibraryManagementSystem.Api.Controllers
         /// </summary>
         /// <param name="id">ID of the book to delete.</param>
         /// <returns>ApiResponse indicating success or failure.</returns>
-        [HttpDelete("{id:long}")]
-        public async Task<IActionResult> Delete(long id)
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
         {
             var result = await _bookService.DeleteAsync(id);
             return StatusCode(result.Status ? 200 : 400, result);

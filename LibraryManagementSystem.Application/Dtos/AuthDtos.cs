@@ -28,7 +28,7 @@ namespace LibraryManagementSystem.Application.Dtos
 
         public class LoginResponse
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
 
             public string Email { get; set; }
 

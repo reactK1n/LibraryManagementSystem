@@ -8,7 +8,7 @@ namespace LibraryManagementSystem.Api.Extensions
     {
         public static void AddIdentityConfig(this IServiceCollection services)
         {
-            services.AddIdentity<ApplicationUser, IdentityRole<long>>()
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<LibraryDbContext>()
                 .AddDefaultTokenProviders();
 
