@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using LibraryManagementSystem.Domain.Entities;
-using Microsoft.AspNetCore.Identity.Data;
 using static LibraryManagementSystem.Application.Dtos.AuthDtos;
 
 namespace LibraryManagementSystem.Application.Profiles

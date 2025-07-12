@@ -1,12 +1,8 @@
-﻿using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using LibraryManagementSystem.Application.Interfaces;
 using LibraryManagementSystem.Domain.Dtos;
 using LibraryManagementSystem.Domain.Entities;
-using LibraryManagementSystem.Domain.IRepository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using static LibraryManagementSystem.Application.Dtos.AuthDtos;
 
@@ -18,25 +14,19 @@ namespace LibraryManagementSystem.Application.Services
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
         private readonly ILogger<AuthService> _logger;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IUnitOfWork _unitOfWork;
 
         public AuthService
         (
             UserManager<ApplicationUser> userManager,
             ILogger<AuthService> logger,
             IMapper mapper,
-            ITokenService tokenService,
-        IHttpContextAccessor httpContextAccessor,
-            IUnitOfWork unitOfWork
+            ITokenService tokenService
         )
         {
             _userManager = userManager;
             _mapper = mapper;
             _tokenService = tokenService;
             _logger = logger;
-            _httpContextAccessor = httpContextAccessor;
-            _unitOfWork = unitOfWork;
         }
 
         public async Task<ApiResponse> Register(RegisterDto request)
@@ -60,42 +50,6 @@ namespace LibraryManagementSystem.Application.Services
             {
                 Status = true,
                 Message = "User created successfully"
-            };
-        }
-
-        public async Task<ApiResponse> ChangePassword(ChangePasswordRequest request)
-        {
-            var user = await _userManager.FindByIdAsync(request.UserId.ToString());
-
-            if (user == null)
-            {
-                _logger.LogWarning("Password change failed: User with ID {UserId} not found", request.UserId);
-                return new ApiResponse
-                {
-                    Message = "User not found.",
-                };
-            }
-
-            // Manually hash the new password
-            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, request.NewPassword);
-
-            // Update the user in the database
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                var errorMessages = string.Join("; ", result.Errors.Select(e => e.Description));
-                _logger.LogWarning("Password change failed for user {Email}: {Errors}", user.Email, errorMessages);
-
-                return new ApiResponse
-                {
-                    Message = "Failed to update the password.",
-                };
-            }
-
-            return new ApiResponse
-            {
-                Status = true,
-                Message = "Password updated successfully."
             };
         }
 
@@ -146,59 +100,6 @@ namespace LibraryManagementSystem.Application.Services
                 Message = "Login successful",
                 Data = loginResponse
             };
-        }
-
-        public async Task<ApiResponse> ResetPassword(ResetPasswordRequest request)
-        {
-
-            _logger.LogInformation("Reset password attempt");
-
-            var email = DecodeToken(request.EncodedEmail);
-            // Find the user by email
-            var user = await _userManager.FindByEmailAsync(email);
-
-            // Manually hash the new password
-            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, request.NewPassword);
-
-            // Update the user in the database
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                var errorMessages = string.Join("; ", result.Errors.Select(e => e.Description));
-                _logger.LogWarning("Password change failed for user {Email}: {Errors}", user.Email, errorMessages);
-
-                return new ApiResponse
-                {
-                    Message = "Failed to update the password."
-                };
-            }
-
-            return new ApiResponse
-            {
-                Status = true,
-                Message = "Password updated successfully."
-            };
-        }
-
-        public async Task Logout()
-        {
-            var headers = _httpContextAccessor.HttpContext.Request.Headers;
-            headers.Remove("Authorization");
-            _logger.LogInformation("User logged out successfully");
-            // If you need to perform any other signout logic (e.g., invalidating tokens), add it here
-            await Task.CompletedTask;
-        }
-
-        private string EncodeToken(string token)
-        {
-            var encodedToken = Encoding.UTF8.GetBytes(token);
-            return WebEncoders.Base64UrlEncode(encodedToken);
-        }
-
-        private string DecodeToken(string token)
-        {
-            var decodedToken = WebEncoders.Base64UrlDecode(token);
-            return Encoding.UTF8.GetString(decodedToken);
         }
     }
 }

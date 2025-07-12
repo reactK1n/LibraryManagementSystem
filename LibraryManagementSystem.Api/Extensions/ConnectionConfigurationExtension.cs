@@ -10,7 +10,7 @@ namespace LibraryManagementSystem.Api.Extensions
         {
             string connectionString;
 
-            if (env.IsDevelopment())
+           if (env.IsDevelopment())
             {
                 connectionString = config["ConnectionStrings:DefaultConnection"]; //for development enviroment
             }
@@ -19,8 +19,7 @@ namespace LibraryManagementSystem.Api.Extensions
                 // Fallback or production/staging connection string
                 connectionString = config["ConnectionStrings:ProductionConnection"]
                                    ?? throw new InvalidOperationException("Production connection string is not configured.");
-            }
-
+            } 
 
             services.AddDbContextPool<LibraryDbContext>(options =>
             {

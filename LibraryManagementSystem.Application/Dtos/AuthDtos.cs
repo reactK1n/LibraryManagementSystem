@@ -26,15 +26,6 @@ namespace LibraryManagementSystem.Application.Dtos
             public required string Password { get; set; }
         }
 
-        public class ChangePasswordRequest
-        {
-            [StrongPassword]
-            public required string NewPassword { get; set; }
-
-            [JsonIgnore]
-            public long UserId { get; set; }
-        }
-
         public class LoginResponse
         {
             public string Id { get; set; }
@@ -45,13 +36,6 @@ namespace LibraryManagementSystem.Application.Dtos
 
             public string RefreshToken { get; set; }
 
-        }
-
-        public class ResetPasswordRequest
-        {
-            public string NewPassword { get; set; }
-
-            public string EncodedEmail { get; set; }
         }
     }
 }

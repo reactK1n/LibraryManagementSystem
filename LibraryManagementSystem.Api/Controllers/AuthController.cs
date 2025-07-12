@@ -1,5 +1,4 @@
 ﻿using LibraryManagementSystem.Application.Interfaces;
-using LibraryManagementSystem.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using static LibraryManagementSystem.Application.Dtos.AuthDtos;
 
@@ -34,41 +33,6 @@ namespace LibraryManagementSystem.Api.Controllers
         {
             var result = await _authService.Login(request);
             return StatusCode(result.Status ? 200 : 400, result);
-        }
-
-        /// <summary>
-        /// Changes a user's password.
-        /// </summary>
-        [HttpPost("change-password")]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
-        {
-            var result = await _authService.ChangePassword(request);
-            return StatusCode(result.Status ? 200 : 400, result);
-        }
-
-        /// <summary>
-        /// Resets a user's password using an encoded email token.
-        /// </summary>
-        [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
-        {
-            var result = await _authService.ResetPassword(request);
-            return StatusCode(result.Status ? 200 : 400, result);
-        }
-
-        /// <summary>
-        /// Logs the user out by removing the authorization header.
-        /// </summary>
-        [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await _authService.Logout();
-            return Ok(new ApiResponse
-            {
-                Status = true,
-                Message = "User logged out successfully",
-                Data = null
-            });
         }
     }
 }
