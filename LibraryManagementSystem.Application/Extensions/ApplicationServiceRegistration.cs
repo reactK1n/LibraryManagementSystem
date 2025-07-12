@@ -11,10 +11,10 @@ namespace LibraryManagementSystem.Application.Extensions
     {
         public static void AddApplicationSevicesInjection(this IServiceCollection services)
         {
-            // Add AutoMapper
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            // Fix for AutoMapper registration  
+            services.AddAutoMapper(cfg => cfg.AddMaps(Assembly.GetExecutingAssembly()));
 
-            //Sevices DI
+            // Services DI  
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<ITokenService, TokenService>();

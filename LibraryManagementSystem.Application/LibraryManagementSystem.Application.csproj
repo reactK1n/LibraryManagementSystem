@@ -20,10 +20,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Profiles\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\LibraryManagementSystem.Domain\LibraryManagementSystem.Domain.csproj" />
 	</ItemGroup>
 

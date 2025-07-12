@@ -29,7 +29,6 @@
 		<ProjectReference Include="..\LibraryManagementSystem.Application\LibraryManagementSystem.Application.csproj" />
 		<ProjectReference Include="..\LibraryManagementSystem.Domain\LibraryManagementSystem.Domain.csproj" />
 		<ProjectReference Include="..\LibraryManagementSystem.Infrastructure\LibraryManagementSystem.Infrastructure.csproj" />
-		<ProjectReference Include="..\LibraryManagementSystem.Infrastucture\LibraryManagementSystem.Infrastucture.csproj" />
 	</ItemGroup>
 
 </Project>

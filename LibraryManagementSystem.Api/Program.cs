@@ -1,4 +1,6 @@
 using LibraryManagementSystem.Api.Extensions;
+using LibraryManagementSystem.Application.Extensions;
+using LibraryManagementSystem.Application.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-//builder.Services.AddApplicationDependencyInjection(builder.Configuration);
-builder.Services.AddPresentationDependencyInjection(builder.Configuration);
+builder.Services.AddServiceRegistrations();
+builder.Services.AddApplicationSevicesInjection();
 
 // Register database context
 builder.Services.AddPlatoonDbContext(builder.Configuration, builder.Environment);
@@ -39,6 +41,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.UsePermissionInitializer();//seed permission
+await app.UseSeedInitializer();//seed permission
 app.MapControllers();
 app.Run();

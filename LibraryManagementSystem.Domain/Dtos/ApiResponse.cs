@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibraryManagementSystem.Domain.Dtos
+﻿namespace LibraryManagementSystem.Domain.Dtos
 {
     public class ApiResponse
-        {
-            public bool Status { get; set; }
-            public string? Message { get; set; }
-            public object? Data { get; set; }
+    {
+        public bool Status { get; set; } = false;
+        public string? Message { get; set; }
+        public object? Data { get; set; }
 
-        }
+    }
 
     public class PaginatedResult<T>
     {

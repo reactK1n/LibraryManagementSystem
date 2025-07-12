@@ -1,0 +1,54 @@
+
+    [
+        {
+            "title": "Clean Code",
+            "author": "Robert C. Martin",
+            "isbn": "9780132350884"
+        },
+        {
+            "title": "The Pragmatic Programmer",
+            "author": "Andrew Hunt and David Thomas",
+            "isbn": "9780201616224"
+        },
+        {
+            "title": "C# in Depth",
+            "author": "Jon Skeet",
+            "isbn": "9781617294532",
+            "publishedDate": "2019-03-23T00:00:00"
+        },
+        {
+            "title": "Introduction to Algorithms",
+            "author": "Thomas H. Cormen",
+            "isbn": "9780262033848"
+        },
+        {
+            "title": "Refactoring",
+            "author": "Martin Fowler",
+            "isbn": "9780201485677"
+        },
+        {
+            "title": "Design Patterns",
+            "author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+            "isbn": "9780201633610"
+        },
+        {
+            "title": "Head First Design Patterns",
+            "author": "Eric Freeman, Elisabeth Robson",
+            "isbn": "9780596007126"
+        },
+        {
+            "title": "Domain-Driven Design",
+            "author": "Eric Evans",
+            "isbn": "9780321125217"
+        },
+        {
+            "title": "Effective C#",
+            "author": "Bill Wagner",
+            "isbn": "9780321245663"
+        },
+        {
+            "title": "Pro ASP.NET Core 6",
+            "author": "Adam Freeman",
+            "isbn": "9781484279568"
+        }
+    ]

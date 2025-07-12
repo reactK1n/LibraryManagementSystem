@@ -12,7 +12,7 @@ using static LibraryManagementSystem.Application.Dtos.AuthDtos;
 
 namespace LibraryManagementSystem.Application.Services
 {
-    internal class AuthService : IAuthService
+    public class AuthService : IAuthService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
@@ -42,7 +42,6 @@ namespace LibraryManagementSystem.Application.Services
         public async Task<ApiResponse> Register(RegisterDto request)
         {
             var user = _mapper.Map<ApplicationUser>(request);
-            user.UserName = request.Email;
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
@@ -53,17 +52,14 @@ namespace LibraryManagementSystem.Application.Services
 
                 return new ApiResponse
                 {
-                    Status = false,
-                    Message = "Registration failed. Please check your input and try again.",
-                    Data = null
+                    Message = "Registration failed. Please check your input and try again."
                 };
             }
 
             return new ApiResponse
             {
                 Status = true,
-                Message = "User created successfully",
-                Data = user.Id
+                Message = "User created successfully"
             };
         }
 
@@ -76,9 +72,7 @@ namespace LibraryManagementSystem.Application.Services
                 _logger.LogWarning("Password change failed: User with ID {UserId} not found", request.UserId);
                 return new ApiResponse
                 {
-                    Status = false,
                     Message = "User not found.",
-                    Data = null
                 };
             }
 
@@ -94,17 +88,14 @@ namespace LibraryManagementSystem.Application.Services
 
                 return new ApiResponse
                 {
-                    Status = false,
                     Message = "Failed to update the password.",
-                    Data = null
                 };
             }
 
             return new ApiResponse
             {
                 Status = true,
-                Message = "Password updated successfully.",
-                Data = null
+                Message = "Password updated successfully."
             };
         }
 
@@ -119,9 +110,7 @@ namespace LibraryManagementSystem.Application.Services
                 _logger.LogWarning("Login failed: User with email {Email} not found", request.Email);
                 return new ApiResponse
                 {
-                    Status = false,
                     Message = "Invalid email or password.",
-                    Data = null
                 };
             }
 
@@ -180,17 +169,14 @@ namespace LibraryManagementSystem.Application.Services
 
                 return new ApiResponse
                 {
-                    Status = false,
-                    Message = "Failed to update the password.",
-                    Data = null
+                    Message = "Failed to update the password."
                 };
             }
 
             return new ApiResponse
             {
                 Status = true,
-                Message = "Password updated successfully.",
-                Data = null
+                Message = "Password updated successfully."
             };
         }
 
@@ -198,6 +184,7 @@ namespace LibraryManagementSystem.Application.Services
         {
             var headers = _httpContextAccessor.HttpContext.Request.Headers;
             headers.Remove("Authorization");
+            _logger.LogInformation("User logged out successfully");
             // If you need to perform any other signout logic (e.g., invalidating tokens), add it here
             await Task.CompletedTask;
         }

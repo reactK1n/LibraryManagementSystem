@@ -81,12 +81,8 @@ namespace LibraryManagementSystem.Application.Services
             if (book == null)
             {
                 _logger.LogWarning("Book not found: ID {Id}", id);
-                return new ApiResponse
-                {
-                    Status = false,
-                    Message = "Book not found",
-                    Data = null
-                };
+
+                return new ApiResponse{ Message = "Book not found" };
             }
 
             _logger.LogInformation("Book retrieved: ID {Id}", id);
@@ -109,12 +105,8 @@ namespace LibraryManagementSystem.Application.Services
             if (book == null)
             {
                 _logger.LogWarning("Book not found for update: ID {Id}", id);
-                return new ApiResponse
-                {
-                    Status = false,
-                    Message = "Book not found",
-                    Data = null
-                };
+
+                return new ApiResponse { Message = "Book not found" };
             }
 
             _mapper.Map(dto, book);
@@ -141,12 +133,8 @@ namespace LibraryManagementSystem.Application.Services
             if (book == null)
             {
                 _logger.LogWarning("Book not found for deletion: ID {Id}", id);
-                return new ApiResponse
-                {
-                    Status = false,
-                    Message = "Book not found",
-                    Data = null
-                };
+
+                return new ApiResponse { Message = "Book not found" };
             }
 
             _unitOfWork.BookRepository.Delete(book);
@@ -157,8 +145,7 @@ namespace LibraryManagementSystem.Application.Services
             return new ApiResponse
             {
                 Status = true,
-                Message = "Book deleted successfully",
-                Data = null
+                Message = "Book deleted successfully"
             };
         }
     }
