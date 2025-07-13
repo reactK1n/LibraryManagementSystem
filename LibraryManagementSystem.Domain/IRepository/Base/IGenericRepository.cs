@@ -9,7 +9,7 @@ namespace LibraryManagementSystem.Domain.IRepository.Base
         Task InsertAsync(TEntity entity);
         Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> filter);
         Task<ICollection<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null);
-        Task<TEntity> GetByIdAsync(long id);
+        Task<TEntity> GetByIdAsync(int id);
         void Update(TEntity entity);
         void Delete(TEntity entity);
 

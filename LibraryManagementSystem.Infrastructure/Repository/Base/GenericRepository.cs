@@ -48,7 +48,7 @@ namespace LibraryManagementSystem.Infrastructure.Repository.Base
         }
 
 
-        public async Task<TEntity> GetByIdAsync(long id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }   

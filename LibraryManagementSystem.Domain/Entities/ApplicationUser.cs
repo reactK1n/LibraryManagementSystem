@@ -12,10 +12,6 @@ namespace LibraryManagementSystem.Domain.Entities
 
         public DateTime? RefreshTokenExpiryTime { get; set; }
 
-        public bool IsActive { get; set; } = true;
-
-        public bool IsDeleted { get; set; }
-
         public DateTime CreatedAt { get; set; }
 
         public DateTime? ModifiedAt { get; set; }

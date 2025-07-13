@@ -11,11 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+// Register database context
+builder.Services.AddLibraryMSDbContext(builder.Configuration, builder.Environment);
+
 builder.Services.AddServiceRegistrations();
 builder.Services.AddApplicationSevicesInjection();
-
-// Register database context
-builder.Services.AddPlatoonDbContext(builder.Configuration, builder.Environment);
 
 // Configure Identity options
 builder.Services.AddIdentityConfig();

@@ -30,7 +30,6 @@ namespace LibraryManagementSystem.Infrastructure.Data.Context
                         break;
                     case EntityState.Added:
                         item.Entity.CreatedAt = DateTime.UtcNow;
-                        item.Entity.IsActive = true;
                         break;
                     default:
                         break;

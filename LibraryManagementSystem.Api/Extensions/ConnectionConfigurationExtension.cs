@@ -6,7 +6,7 @@ namespace LibraryManagementSystem.Api.Extensions
     public static class ConnectionConfigurationExtension
     {
 
-        public static void AddPlatoonDbContext(this IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
+        public static void AddLibraryMSDbContext(this IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
             string connectionString;
 
