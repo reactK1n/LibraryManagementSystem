@@ -45,6 +45,9 @@ dotnet ef database update
 
 ### 3. Run the Application
 
+migrate to this location before the applicaton 
+###cd LibraryManagementSystem/LibraryManagementSystem.Api
+
 ```bash
 dotnet run
 ```
