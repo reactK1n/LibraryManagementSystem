@@ -30,7 +30,7 @@ This is a simple **Library Management System API** built with **ASP.NET Core** a
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com//library-management-system.git
+git clone https://github.com/reactK1n/library-management-system.git
 cd LibraryManagementSystem/LibraryManagementSystem.Api
 ```
 
@@ -41,6 +41,11 @@ If you're using **EF Core CLI**, make sure it's installed globally:
 ```bash
 dotnet tool install --global dotnet-ef
 dotnet ef database update
+```
+If you are using **Package Manager Console** 
+make sure you set your default project to LibraryManagementSystem.Infrastructure
+```bash
+update-database
 ```
 
 ### 3. Run the Application
