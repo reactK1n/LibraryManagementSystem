@@ -45,10 +45,10 @@ dotnet ef database update
 
 ### 3. Run the Application
 
-migrate to this location before the applicaton 
-###cd LibraryManagementSystem/LibraryManagementSystem.Api
-
 ```bash
+migrate to this location before runing the applicaton.
+cd LibraryManagementSystem/LibraryManagementSystem.Api
+
 dotnet run
 ```
 
@@ -123,7 +123,7 @@ Authorization: Bearer your_jwt_token_here
 
 ## 🧠 Contribution
 
-You're welcome to fork and contribute!
+You're welcome!
 
 ---
 
