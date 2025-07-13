@@ -6,12 +6,11 @@ using LibraryManagementSystem.Infrastructure.Repository.Base;
 
 namespace LibraryManagementSystem.Infrastructure.Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly LibraryDbContext _context;
-
         private IGenericRepository<Book> _bookRepository;
-
+        private bool _disposed = false;
 
         public UnitOfWork(LibraryDbContext context)
         {
@@ -21,15 +20,29 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         public IGenericRepository<Book> BookRepository
             => _bookRepository ??= new GenericRepository<Book>(_context);
 
-
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
         }
 
+        // Public Dispose method
         public void Dispose()
         {
-            _context.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        // Protected implementation to allow overriding
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+                _disposed = true;
+            }
         }
     }
 }

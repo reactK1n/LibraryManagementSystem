@@ -104,6 +104,7 @@ You must be authenticated to access any book endpoint.
 ### Book Create
 
 ```json
+"ISBN should be a unique number and must be 13 characters" 
 {
   "title": "Refactoring",
   "author": "Martin Fowler",

@@ -15,7 +15,15 @@ namespace LibraryManagementSystem.Application.Profiles
             CreateMap<BookResponse, Book>().ReverseMap();
 
             CreateMap<UpdateRequest, Book>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+              .ForMember(dest => dest.Title, opt =>
+                  opt.Condition(src => src.Title != null))
+              .ForMember(dest => dest.Author, opt =>
+                  opt.Condition(src => src.Author != null))
+              .ForMember(dest => dest.ISBN, opt =>
+                  opt.Condition(src => src.ISBN != null))
+              .ForMember(dest => dest.PublishedDate, opt =>
+                  opt.Condition(src => src.PublishedDate != null));
+
 
         }
     }

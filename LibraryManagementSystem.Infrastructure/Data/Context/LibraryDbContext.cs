@@ -16,6 +16,10 @@ namespace LibraryManagementSystem.Infrastructure.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Book>() //isbn is unique
+             .HasIndex(b => b.ISBN)
+             .IsUnique();
         }
 
 

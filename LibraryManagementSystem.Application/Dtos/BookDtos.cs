@@ -1,13 +1,17 @@
-﻿namespace LibraryManagementSystem.Application.Dtos
+﻿using static LibraryManagementSystem.Application.Utilities.Validators.BookValidation;
+
+namespace LibraryManagementSystem.Application.Dtos
 {
     public class BookDtos
     {
         public class CreateRequest
         {
-            public string Title { get; set; }
-            public string Author { get; set; }
-            public string ISBN { get; set; }
-            public DateTime PublishedDate { get; set; }
+            public required string Title { get; set; }
+            public required string Author { get; set; }
+
+            [Isbn13Only]
+            public required string ISBN { get; set; }
+            public required DateTime PublishedDate { get; set; }
         }
 
         public class BookResponse
@@ -25,6 +29,8 @@
         {
             public string? Title { get; set; }
             public string? Author { get; set; }
+
+            [Isbn13Only]
             public string? ISBN { get; set; }
             public DateTime? PublishedDate { get; set; }
         }

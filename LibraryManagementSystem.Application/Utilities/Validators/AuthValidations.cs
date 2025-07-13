@@ -14,22 +14,26 @@ namespace LibraryManagementSystem.Application.Utilities.Validators
                 if (string.IsNullOrWhiteSpace(password))
                     return new ValidationResult("Password is required");
 
-                var hasUpper = new Regex(@"[A-Z]+");
-                var hasLower = new Regex(@"[a-z]+");
-                var hasDigit = new Regex(@"\d+");
+                var hasUpper = new Regex(@"[A-Z]");
+                var hasLower = new Regex(@"[a-z]");
+                var hasDigit = new Regex(@"\d");
+                var hasSpecial = new Regex(@"[!@#$%^&*(),.?""{}|<>]");
 
+                if (password.Length < 8)
+                    return new ValidationResult("Password must be at least 8 characters long.");
                 if (!hasUpper.IsMatch(password))
                     return new ValidationResult("Password must contain at least one uppercase letter.");
                 if (!hasLower.IsMatch(password))
                     return new ValidationResult("Password must contain at least one lowercase letter.");
                 if (!hasDigit.IsMatch(password))
                     return new ValidationResult("Password must contain at least one number.");
-                if (password.Length < 8)
-                    return new ValidationResult("Password must be at least 8 characters long.");
+                if (!hasSpecial.IsMatch(password))
+                    return new ValidationResult("Password must contain at least one special character.");
 
                 return ValidationResult.Success;
             }
         }
+
 
 
         public class ValidEmailAttribute : ValidationAttribute
